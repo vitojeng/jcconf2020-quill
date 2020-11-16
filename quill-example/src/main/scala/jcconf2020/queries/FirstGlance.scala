@@ -1,4 +1,4 @@
-package jcconf2020.glance
+package jcconf2020.queries
 
 import io.getquill._
 import pprint._
