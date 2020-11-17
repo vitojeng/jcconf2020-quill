@@ -1,15 +1,4 @@
-package jcconf2020.async
-
-import java.util.concurrent.TimeUnit
-
-import com.github.jasync.sql.db.Configuration
-import com.github.jasync.sql.db.pool.{ConnectionPool, PoolConfiguration}
-import com.github.jasync.sql.db.postgresql.pool.PostgreSQLConnectionFactory
-import com.github.jasync.sql.db.postgresql.{PostgreSQLConnection, PostgreSQLConnectionBuilder}
-import com.typesafe.config.Config
-import com.zaxxer.hikari.{HikariConfig, HikariDataSource}
-import io.getquill.{LowerCase, PostgresJAsyncContext, PostgresJAsyncContextConfig, PostgresJdbcContext}
-import org.postgresql.ds.PGSimpleDataSource
+package jcconf2020.quill.queries
 
 /*
   Working with Databases using Scala and Quill
@@ -47,6 +36,20 @@ case class CountryLanguage(countrycode: String,
         isOfficial: Boolean,
         percentage: Double)
 
-trait MyPostgresContext {
 
-}
+//trait MyPostgresContext {
+//
+//  //val ctx = new PostgresJdbcContext(LowerCase, dataSource)
+//  val ctx = new PostgresJdbcContext(LowerCase, "ctx")
+//
+//  private def dataSource = {
+//    val pgDataSource = new PGSimpleDataSource()
+//    pgDataSource.setUser("postgres")
+//    pgDataSource.setDatabaseName("postgres")
+//
+//    val config = new HikariConfig()
+//    config.setDataSource(pgDataSource)
+//    new HikariDataSource(config)
+//  }
+//
+//}

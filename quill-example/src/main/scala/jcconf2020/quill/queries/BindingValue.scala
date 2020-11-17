@@ -1,4 +1,4 @@
-package jcconf2020.queries
+package jcconf2020.quill.queries
 
 import io.getquill.{LowerCase, PostgresJdbcContext}
 import pprint._

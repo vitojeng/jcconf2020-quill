@@ -1,4 +1,4 @@
-package jcconf2020.demo
+package jcconf2020.quill.demo
 
 import com.github.vertical_blank.sqlformatter.SqlFormatter
 

@@ -1,4 +1,4 @@
-package jcconf2020.queries
+package jcconf2020.quill.queries
 
 import com.github.vertical_blank.sqlformatter.SqlFormatter
 import io.getquill._

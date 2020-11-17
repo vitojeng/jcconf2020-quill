@@ -1,4 +1,4 @@
-package jcconf2020.demo
+package jcconf2020.quill.demo
 
 import io.getquill._
 import pprint._

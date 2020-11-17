@@ -1,4 +1,4 @@
-package jcconf2020.async
+package jcconf2020.quill.async
 
 import io.getquill._
 
