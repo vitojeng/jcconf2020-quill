@@ -6,6 +6,7 @@ ThisBuild / organizationName := "example"
 
 val verQuill = "3.5.2"
 val verPostgresql = "42.2.14"
+val verPprint = "0.5.6"
 
 lazy val example = (project in file("quill-example"))
         .settings(
@@ -13,7 +14,7 @@ lazy val example = (project in file("quill-example"))
           libraryDependencies += "io.getquill" %% "quill-jdbc" % verQuill,
           libraryDependencies += "io.getquill" %% "quill-jasync-postgres" % verQuill,
           libraryDependencies += "org.postgresql" % "postgresql" % verPostgresql,
-          libraryDependencies += "com.lihaoyi" %% "pprint" % "0.5.6"
+          libraryDependencies += "com.lihaoyi" %% "pprint" % verPprint
         )
 
 lazy val context = (project in file("quill-context"))
@@ -30,5 +31,5 @@ lazy val probing = (project in file("quill-probing"))
           //unmanagedClasspath in Compile += baseDirectory.value / "src" / "main" / "resources",
 
           libraryDependencies += "io.getquill" %% "quill-jdbc" % verQuill,
-          libraryDependencies += "com.lihaoyi" %% "pprint" % "0.5.6"
+          libraryDependencies += "com.lihaoyi" %% "pprint" % verPprint
         )
