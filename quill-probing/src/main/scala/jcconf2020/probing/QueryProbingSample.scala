@@ -11,7 +11,7 @@ case class City(id: Int,
 
 object QueryProbingSample {
 
-  val ctx = MyQuillContext
+  val ctx = MyQuillContext      // Use MyQuillContext to enable `Query probing`
   import ctx._
 
   def main(args: Array[String]): Unit = {

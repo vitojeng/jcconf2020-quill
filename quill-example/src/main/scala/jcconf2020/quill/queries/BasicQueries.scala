@@ -75,20 +75,3 @@ object DistinctSample {
   }
 
 }
-
-object DynamicVariableSample {
-  import scala.util.DynamicVariable
-  import scala.concurrent._
-  import scala.concurrent.duration._
-  implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
-  def main(args: Array[String]): Unit = {
-    val dv = new DynamicVariable(0)
-    def setDV(): Unit = dv.value = 123
-    def getDV(): Int = {
-      Await.ready(Future(setDV()), Duration.Inf)
-      dv.value
-    }
-    println(getDV())
-  }
-
-}

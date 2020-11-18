@@ -4,6 +4,34 @@ import com.github.vertical_blank.sqlformatter.SqlFormatter
 import io.getquill._
 import pprint._
 
+case class Person(id:Int, name:String, age:Int)
+
+object DynamicQuotation {
+  val ctx = new SqlMirrorContext(MirrorSqlDialect, Literal)
+
+  import ctx._
+
+  sealed trait QueryType
+  case object Minor extends QueryType
+  case object Senior extends QueryType
+
+  def people(t: QueryType) =
+    t match {
+      case Minor => quote {
+        query[Person].filter(p => p.age < 18)
+      }
+      case Senior => quote {
+        query[Person].filter(p => p.age > 65)
+      }
+    }
+
+  def main(args: Array[String]): Unit = {
+    ctx.run(people(Minor))
+    ctx.run(people(Senior))
+  }
+
+}
+
 object DynamicQuerySample {
 
   val ctx = new PostgresJdbcContext(LowerCase, "ctx")
@@ -57,10 +85,10 @@ object DynamicQuerySample {
   }
 
   def main(args: Array[String]): Unit = {
-//    sample_runtime()
+    sample_runtime()
     sample_dynamic()
     sample_dynamicQuery()
-//    sample_dynamicQuerySchema()
+    sample_dynamicQuerySchema()
   }
 
 }

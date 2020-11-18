@@ -47,7 +47,7 @@ object CountrySample3 extends ConsolePrint {
       (f: Country => Boolean) =>
         query[Country].filter(f(_))
     }
-    val q = quote( queryCountry(_.code=="TWN") )
+    val q = quote( queryCountry((c: Country) => c.code=="TWN") )
     printlnSql( ctx.translate(q) )
     pprintln( ctx.run(q), height = 15 )
   }

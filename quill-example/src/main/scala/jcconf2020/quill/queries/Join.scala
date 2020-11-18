@@ -31,9 +31,9 @@ object ApplicativeJoinSample {
 
   val taiwanCities2 = quote {
     query[City]
-            .join(query[Country]).on { case (ci, co)=> ci.countryCode==co.code}
-            .join(query[CountryLanguage]).on { case ((_, co), cl)=> co.code==cl.countrycode}
-            .filter{ case ((_, co), _)=> co.code=="TWN"}
+            .join(query[Country]).on { case (ci, co)=> ci.countryCode==co.code }
+            .join(query[CountryLanguage]).on { case ((_, co), cl)=> co.code==cl.countrycode }
+            .filter { case ((_, co), _)=> co.code=="TWN" }
             .map { case ((ci, co), cl)=> (ci.name, co.name, cl.language) }
   }
 
@@ -53,8 +53,10 @@ object ImplicitJoinSample {
   val queryTaiwanCities = quote {
     for {
       ci <- query[City]
-      co <- query[Country].filter(co0=>co0.code=="TWN") if (ci.countryCode==co.code)
-      cl <- query[CountryLanguage] if (co.code==cl.countrycode)
+      co <- query[Country].filter(co0=>co0.code=="TWN")
+              if (ci.countryCode==co.code)
+      cl <- query[CountryLanguage]
+              if (co.code==cl.countrycode)
     } yield (ci.name, co.name, cl.language)
   }
 
@@ -88,31 +90,4 @@ object FlatJoinSample {
     result.foreach(pprintln(_))
   }
 
-}
-
-case class Person(id:Int, name:String, age:Int)
-
-object Test {
-  val ctx = new SqlMirrorContext(MirrorSqlDialect, Literal)
-
-  import ctx._
-
-  sealed trait QueryType
-  case object Minor extends QueryType
-  case object Senior extends QueryType
-
-  def people(t: QueryType) =
-    t match {
-      case Minor => quote {
-        query[Person].filter(p => p.age < 18)
-      }
-      case Senior => quote {
-        query[Person].filter(p => p.age > 65)
-      }
-    }
-
-  def main(args: Array[String]): Unit = {
-    ctx.run(people(Minor))
-    ctx.run(people(Senior))
-  }
 }

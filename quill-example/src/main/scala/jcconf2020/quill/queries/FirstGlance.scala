@@ -1,6 +1,7 @@
 package jcconf2020.quill.queries
 
 import io.getquill._
+import jcconf2020.quill.queries.FirstGlance.ctx
 import pprint._
 
 object FirstGlance {
@@ -15,8 +16,9 @@ object FirstGlance {
           .map(c=> (c.id, c.name, c.population) )
     }
     pprintln(q.ast)
-    val result = ctx.run(q)
+    val result: QueryMirror[(Index, String, Index)] = ctx.run(q)
     pprintln(result.ast)
+    ctx.close()
   }
 }
 
@@ -32,8 +34,8 @@ object FirstGlance_Postgres {
               .map(c=> (c.id, c.name, c.population) )
     }
     pprintln(q.ast)
-    pprintln(q.toString)
-    val result = ctx.run(q)
+    val result: List[(Index, String, Index)] = ctx.run(q)
+    result.take(10).foreach(println)
     ctx.close()
   }
 
